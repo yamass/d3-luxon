@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "pretest": "rollup -c",
-    "test": "TZ=America/Los_Angeles tape 'test/**/*-test.js' && eslint src",
+    "test": "tape 'test/**/*-test.js' && eslint src",
     "prepublishOnly": "rm -rf dist && yarn test",
     "postpublish": "git push && git push --tags"
   },
