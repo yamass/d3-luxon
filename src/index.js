@@ -1,21 +1,21 @@
 export {
   default as scaleZoned
-} from "./zonedTime.js";
+} from "./scale/zonedTime.js";
 
 export {
   default as zonedMinute,
   zonedMinutes as zonedMinutes
-} from "./zonedMinute.js";
+} from "./time/zonedMinute.js";
 
 export {
   default as zonedHour,
   zonedHours as zonedHours
-} from "./zonedHour.js";
+} from "./time/zonedHour.js";
 
 export {
   default as zonedDay,
   zonedDays as zonedDays
-} from "./zonedDay.js";
+} from "./time/zonedDay.js";
 
 export {
   zonedWeek as zonedWeek,
@@ -34,14 +34,14 @@ export {
   zonedFridays as zonedFridays,
   zonedSaturday as zonedSaturday,
   zonedSaturdays as zonedSaturdays
-} from "./zonedWeek.js";
+} from "./time/zonedWeek.js";
 
 export {
   default as zonedMonth,
   zonedMonths as zonedMonths
-} from "./zonedMonth.js";
+} from "./time/zonedMonth.js";
 
 export {
   default as zonedYear,
   zonedYears as zonedYears
-} from "./zonedYear.js";
+} from "./time/zonedYear.js";
