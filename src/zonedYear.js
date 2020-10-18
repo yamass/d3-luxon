@@ -1,7 +1,7 @@
 import interval from "../node_modules/d3-time/src/interval";
 import {toDateTime} from "./dateTimeUtil";
 
-function zonedYear(zone) {
+function zonedYear(zone = "UTC") {
   const dt = toDateTime.bind(null, zone);
   return interval(function (date) {
     date.setTime(dt(date).startOf("year").valueOf());
@@ -16,6 +16,6 @@ function zonedYear(zone) {
 
 export default zonedYear;
 
-export function zonedYears(zone) {
-  return zonedYear(zone).range;
+export function zonedYears(zone, ...additionalArguments) {
+  return zonedYear(zone).range(additionalArguments);
 }

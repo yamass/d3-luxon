@@ -1,7 +1,7 @@
 import interval from "../node_modules/d3-time/src/interval";
 import {toDateTime} from "./dateTimeUtil";
 
-function zonedMonth(zone) {
+function zonedMonth(zone = "UTC") {
   const dt = toDateTime.bind(null, zone);
   return interval(function (date) {
     date.setTime(dt(date).startOf("month").valueOf());
@@ -16,6 +16,6 @@ function zonedMonth(zone) {
 
 export default zonedMonth;
 
-export function zonedMonths(zone) {
-  return zonedMonth(zone).range;
+export function zonedMonths(zone, ...additionalArguments) {
+  return zonedMonth(zone).range(additionalArguments);
 }

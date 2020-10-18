@@ -11,6 +11,6 @@ import {utcMillisecond, utcSecond} from "d3-time";
 import {DateTime} from "luxon";
 
 export default function zonedTime(zone, firstDayOfWeek, ...additionalArguments) {
-  return initRange.apply(calendar(zonedYear(zone), zonedMonth(zone), zonedWeek(firstDayOfWeek, zone), zonedDay(zone), zonedHour(zone), zonedMinute(zone), utcSecond, utcMillisecond, utcFormat)
+  return initRange.apply(calendar(zonedYear(zone), zonedMonth(zone), zonedWeek(zone, firstDayOfWeek), zonedDay(zone), zonedHour(zone), zonedMinute(zone), utcSecond, utcMillisecond, utcFormat)
       .domain([DateTime.fromObject({year: 2000, month: 1, day: 1, zone: zone}).toJSDate(), DateTime.fromObject({year: 2000, month: 1, day: 2, zone: zone})]), additionalArguments);
 }

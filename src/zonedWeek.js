@@ -1,7 +1,7 @@
 import interval from "../node_modules/d3-time/src/interval";
 import {toDateTime} from "./dateTimeUtil";
 
-function zonedWeekday(firstDayOfWeek, zone) {
+function zonedWeekday(zone = "UTC", firstDayOfWeek = 7) {
     const dt = toDateTime.bind(null, zone);
     return interval(function (date) {
         let dateTime = dt(date);
@@ -13,47 +13,27 @@ function zonedWeekday(firstDayOfWeek, zone) {
     });
 }
 
-export function zonedWeek(firstDayOfWeek, zone) {
-    return zonedWeekday(firstDayOfWeek, zone);
+export function zonedWeek(zone, firstDayOfWeek) {
+    return zonedWeekday(zone, firstDayOfWeek);
 }
-export function zonedWeeks(firstDayOfWeek, zone) {
-    return zonedWeekday(firstDayOfWeek, zone).range;
-}
-
-export var zonedMonday = zonedWeekday.bind(null, 1);
-export var zonedTuesday = zonedWeekday.bind(null, 2);
-export var zonedWednesday = zonedWeekday.bind(null, 3);
-export var zonedThursday = zonedWeekday.bind(null, 4);
-export var zonedFriday = zonedWeekday.bind(null, 5);
-export var zonedSaturday = zonedWeekday.bind(null, 6);
-export var zonedSunday = zonedWeekday.bind(null, 7);
-
-export function zonedMondays(zone) {
-    return zonedMonday(zone).range;
+export function zonedWeeks(zone, firstDayOfWeek, ...additionalArguments) {
+    return zonedWeekday(zone, firstDayOfWeek).range(additionalArguments);
 }
 
-export function zonedTuesdays(zone) {
-    return zonedTuesday(zone).range;
-}
+export var zonedMonday = function(zone) {return zonedWeekday(zone, 1);}
+export var zonedTuesday = function(zone) {return zonedWeekday(zone, 2);}
+export var zonedWednesday = function(zone) {return zonedWeekday(zone, 3);}
+export var zonedThursday = function(zone) {return zonedWeekday(zone, 4);}
+export var zonedFriday = function(zone) {return zonedWeekday(zone, 5);}
+export var zonedSaturday = function(zone) {return zonedWeekday(zone, 6);}
+export var zonedSunday = function(zone) {return zonedWeekday(zone, 7);}
 
-export function zonedWednesdays(zone) {
-    return zonedWednesday(zone).range;
-}
-
-export function zonedThursdays(zone) {
-    return zonedThursday(zone).range;
-}
-
-export function zonedFridays(zone) {
-    return zonedFriday(zone).range;
-}
-
-export function zonedSaturdays(zone) {
-    return zonedSaturday(zone).range;
-}
-
-export function zonedSundays(zone) {
-    return zonedSunday(zone).range;
-}
+export function zonedMondays(zone, ...additionalArguments) {return zonedWeekday(zone, 1).range(additionalArguments);}
+export function zonedTuesdays(zone, ...additionalArguments) {return zonedWeekday(zone, 2).range(additionalArguments);}
+export function zonedWednesdays(zone, ...additionalArguments) {return zonedWeekday(zone, 3).range(additionalArguments);}
+export function zonedThursdays(zone, ...additionalArguments) {return zonedWeekday(zone, 4).range(additionalArguments);}
+export function zonedFridays(zone, ...additionalArguments) {return zonedWeekday(zone, 5).range(additionalArguments);}
+export function zonedSaturdays(zone, ...additionalArguments) {return zonedWeekday(zone, 6).range(additionalArguments);}
+export function zonedSundays(zone, ...additionalArguments) {return zonedWeekday(zone, 7).range(additionalArguments);}
 
 

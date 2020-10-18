@@ -1,7 +1,7 @@
 import interval from "../node_modules/d3-time/src/interval";
 import {toDateTime} from "./dateTimeUtil";
 
-function zonedHour(zone) {
+function zonedHour(zone = "UTC") {
     const dt = toDateTime.bind(null, zone);
     return interval(function (date) {
         date.setTime(dt(date).startOf("hour").valueOf());
@@ -16,6 +16,6 @@ function zonedHour(zone) {
 
 export default zonedHour;
 
-export function zonedHours(zone) {
-    return zonedHour(zone).range;
+export function zonedHours(zone, ...additionalArguments) {
+    return zonedHour(zone).range(additionalArguments);
 }

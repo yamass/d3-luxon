@@ -1,7 +1,7 @@
 import interval from "../node_modules/d3-time/src/interval";
 import {toDateTime} from "./dateTimeUtil";
 
-function zonedDay(zone) {
+function zonedDay(zone = "UTC") {
     const dt = toDateTime.bind(null, zone);
     return interval(function (date) {
         date.setTime(dt(date).startOf("day").valueOf());
@@ -16,6 +16,6 @@ function zonedDay(zone) {
 
 export default zonedDay;
 
-export function zonedDays(zone) {
-    return zonedDay(zone).range;
+export function zonedDays(zone, ...additionalArguments) {
+    return zonedDay(zone).range(additionalArguments);
 }

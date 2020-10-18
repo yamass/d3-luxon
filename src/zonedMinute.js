@@ -1,7 +1,7 @@
 import interval from "../node_modules/d3-time/src/interval";
 import {toDateTime} from "./dateTimeUtil";
 
-function zonedMinute(zone) {
+function zonedMinute(zone = "UTC") {
     const dt = toDateTime.bind(null, zone);
     return interval(function (date) {
         date.setTime(dt(date).startOf("minute").valueOf());
@@ -16,6 +16,6 @@ function zonedMinute(zone) {
 
 export default zonedMinute;
 
-export function zonedMinutes(zone) {
-    return zonedMinute(zone).range;
+export function zonedMinutes(zone, ...additionalArguments) {
+    return zonedMinute(zone).range(additionalArguments);
 }
