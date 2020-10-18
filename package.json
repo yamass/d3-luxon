@@ -1,0 +1,52 @@
+{
+  "name": "d3-luxon",
+  "version": "1.0.0",
+  "description": "Luxon-based d3-time and d3-scale implementations",
+  "keywords": [
+    "d3",
+    "time",
+    "scale",
+    "visualization"
+  ],
+  "homepage": "https://github.com/yamass/d3-luxon",
+  "license": "BSD-3-Clause",
+  "author": {
+    "name": "Yann Massard",
+    "url": "https://github.com/yamass"
+  },
+  "main": "dist/d3-luxon.js",
+  "unpkg": "dist/d3-luxon.min.js",
+  "jsdelivr": "dist/d3-luxon.min.js",
+  "module": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yamass/d3-luxon.git"
+  },
+  "files": [
+    "dist/**/*.js",
+    "src/**/*.js"
+  ],
+  "scripts": {
+    "pretest": "rollup -c",
+    "test": "TZ=America/Los_Angeles tape 'test/**/*-test.js' && eslint src",
+    "prepublishOnly": "rm -rf dist && yarn test",
+    "postpublish": "git push && git push --tags"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "d3-array": "^2.3.0",
+    "d3-format": "1 - 2",
+    "d3-interpolate": "1.2.0 - 2",
+    "d3-scale": "^3.2.3",
+    "d3-time": "1 - 2",
+    "d3-time-format": "2 - 3",
+    "luxon": "^1.25.0"
+  },
+  "devDependencies": {
+    "d3-color": "1 - 2",
+    "eslint": "6",
+    "rollup": "1",
+    "rollup-plugin-terser": "5",
+    "tape": "4"
+  }
+}
