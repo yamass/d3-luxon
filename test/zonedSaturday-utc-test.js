@@ -2,7 +2,7 @@ var tape = require("tape"),
     time = require("../"),
     date = require("./date");
 
-tape("utcSaturday.floor(date) returns Saturdays", function(test) {
+tape("zonedSaturday.floor(date) returns Saturdays", function(test) {
   test.deepEqual(time.zonedSaturday("UTC").floor(date.utc(2011, 00, 06, 23, 59, 59)), date.utc(2011, 00, 01));
   test.deepEqual(time.zonedSaturday("UTC").floor(date.utc(2011, 00, 07, 00, 00, 00)), date.utc(2011, 00, 01));
   test.deepEqual(time.zonedSaturday("UTC").floor(date.utc(2011, 00, 07, 00, 00, 01)), date.utc(2011, 00, 01));
@@ -12,7 +12,7 @@ tape("utcSaturday.floor(date) returns Saturdays", function(test) {
   test.end();
 });
 
-tape("utcSaturday.count(start, end) counts Saturdays after start (exclusive) and before end (inclusive)", function(test) {
+tape("zonedSaturday.count(start, end) counts Saturdays after start (exclusive) and before end (inclusive)", function(test) {
   //       January 2012
   // Su Mo Tu We Th Fr Sa
   //  1  2  3  4  5  6  7
@@ -39,7 +39,7 @@ tape("utcSaturday.count(start, end) counts Saturdays after start (exclusive) and
   test.end();
 });
 
-tape("utcSaturday.count(start, end) does not observe daylight saving", function(test) {
+tape("zonedSaturday.count(start, end) does not observe daylight saving", function(test) {
   test.equal(time.zonedSaturday("UTC").count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 01)), 10);
   test.equal(time.zonedSaturday("UTC").count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 03)), 10);
   test.equal(time.zonedSaturday("UTC").count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 04)), 10);
