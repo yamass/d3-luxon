@@ -18,6 +18,7 @@
   "unpkg": "dist/d3-luxon.min.js",
   "jsdelivr": "dist/d3-luxon.min.js",
   "module": "src/index.js",
+  "types": "src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/yamass/d3-luxon.git"
@@ -34,6 +35,7 @@
   },
   "sideEffects": false,
   "dependencies": {
+    "@types/d3-scale": "^3.2.0",
     "d3-array": "^2.3.0",
     "d3-format": "1 - 2",
     "d3-interpolate": "1.2.0 - 2",

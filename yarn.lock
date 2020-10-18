@@ -18,6 +18,18 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@types/d3-scale@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@types/d3-scale/-/d3-scale-3.2.0.tgz#5ea99e6fa203882820dde4b31fc937100800a596"
+  integrity sha512-AhnhueLSDQtS3ZpymlzKqT0siMToe/+mhIFf3UcH/hzlWnqPfPigb3vIFgpEL8k9KARx41t3qQGVFc9awYWpEg==
+  dependencies:
+    "@types/d3-time" "*"
+
+"@types/d3-time@*":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/d3-time/-/d3-time-2.0.0.tgz#831dd093db91f16b83ba980e194bb8e4bcef44d6"
+  integrity sha512-Abz8bTzy8UWDeYs9pCa3D37i29EWDjNTjemdk0ei1ApYVNqulYlGUKip/jLOpogkPSsPz/GvZCYiC7MFlEk0iQ==
+
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
