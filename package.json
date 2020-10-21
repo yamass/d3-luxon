@@ -18,14 +18,15 @@
   "unpkg": "dist/d3-luxon.min.js",
   "jsdelivr": "dist/d3-luxon.min.js",
   "module": "src/index.js",
-  "types": "./index.d.ts",
+  "types": "src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/yamass/d3-luxon.git"
   },
   "files": [
     "dist/**/*.js",
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/*.d.ts"
   ],
   "scripts": {
     "pretest": "rollup -c",
