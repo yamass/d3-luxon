@@ -1,6 +1,6 @@
 {
   "name": "d3-luxon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Luxon-based d3-time and d3-scale implementations",
   "keywords": [
     "d3",
@@ -18,7 +18,7 @@
   "unpkg": "dist/d3-luxon.min.js",
   "jsdelivr": "dist/d3-luxon.min.js",
   "module": "src/index.js",
-  "types": "src/index.d.ts",
+  "types": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/yamass/d3-luxon.git"
@@ -31,7 +31,7 @@
     "pretest": "rollup -c",
     "test": "tape 'test/**/*-test.js' && eslint src",
     "prepublishOnly": "rm -rf dist && yarn test",
-    "postpublish": "git push && git push --tags"
+    "postpublish": "git tag -a v${npm_package_version} -m \"v${npm_package_version}\" && git push && git push --tags"
   },
   "sideEffects": false,
   "dependencies": {
