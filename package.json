@@ -1,6 +1,6 @@
 {
   "name": "d3-luxon",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Luxon-based d3-time and d3-scale implementations",
   "keywords": [
     "d3",
@@ -32,7 +32,7 @@
     "pretest": "rollup -c",
     "test": "tape 'test/**/*-test.js' && eslint src",
     "prepublishOnly": "rm -rf dist && yarn test",
-    "postpublish": "git tag -a v${npm_package_version} -m \"v${npm_package_version}\" && git push && git push --tags"
+    "postpublish": "git push && git push --tags"
   },
   "sideEffects": false,
   "dependencies": {
