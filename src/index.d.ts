@@ -241,7 +241,7 @@ export function zonedYears(zone: string, start: Date, stop: Date, step?: number)
  *
  * The scale will have range and output of data type number.
  */
-export function scaleZoned(zone: string, firstDayOfWeek: number): ScaleTime<number, number>;
+export function scaleZoned(zone: string, firstDayOfWeek: number, locale?: string): ScaleTime<number, number>;
 /**
  * Constructs a new time scale using the specified time zone with the domain [2000-01-01, 2000-01-02], the default interpolator and clamping disabled.
  *
@@ -253,7 +253,7 @@ export function scaleZoned(zone: string, firstDayOfWeek: number): ScaleTime<numb
  *
  * The interpolator factory may be set using the interpolate(...) method of the scale.
  */
-export function scaleZoned<Output>(zone: string, firstDayOfWeek: number): ScaleTime<Output, Output>;
+export function scaleZoned<Output>(zone: string, firstDayOfWeek: number, locale?: string): ScaleTime<Output, Output>;
 /**
  * Constructs a new time scale using the specified time zone with the domain [2000-01-01, 2000-01-02], the default interpolator and clamping disabled.
  *
@@ -267,4 +267,4 @@ export function scaleZoned<Output>(zone: string, firstDayOfWeek: number): ScaleT
  *
  * The interpolator factory may be set using the interpolate(...) method of the scale.
  */
-export function scaleZoned<Range, Output>(zone: string, firstDayOfWeek: number): ScaleTime<Range, Output>;
+export function scaleZoned<Range, Output>(zone: string, firstDayOfWeek: number, locale?: string): ScaleTime<Range, Output>;

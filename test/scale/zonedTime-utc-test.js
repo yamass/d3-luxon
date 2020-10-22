@@ -397,7 +397,7 @@ tape(`scaleZoned.tickFormat()(date) formats month on the 1st of each month`, fun
 
 tape(`scaleZoned.tickFormat()(date) formats week on Sunday midnight`, function(test) {
   var f = zonedTime.scaleZoned("UTC", 7).tickFormat();
-  test.equal(f(date.utc(2011, 1, 6)), "Feb 06");
+  test.equal(f(date.utc(2011, 1, 6)), "Feb 6");
   test.equal(f(date.utc(2011, 1, 13)), "Feb 13");
   test.equal(f(date.utc(2011, 1, 20)), "Feb 20");
   test.end();
@@ -405,9 +405,9 @@ tape(`scaleZoned.tickFormat()(date) formats week on Sunday midnight`, function(t
 
 tape(`scaleZoned.tickFormat()(date) formats date on midnight`, function(test) {
   var f = zonedTime.scaleZoned("UTC", 7).tickFormat();
-  test.equal(f(date.utc(2011, 1, 2)), "Wed 02");
-  test.equal(f(date.utc(2011, 1, 3)), "Thu 03");
-  test.equal(f(date.utc(2011, 1, 4)), "Fri 04");
+  test.equal(f(date.utc(2011, 1, 2)), "Feb 2"); // !! intentionally differs from default implementation
+  test.equal(f(date.utc(2011, 1, 3)), "Feb 3"); // !! intentionally differs from default implementation
+  test.equal(f(date.utc(2011, 1, 4)), "Feb 4"); // !! intentionally differs from default implementation
   test.end();
 });
 
@@ -415,7 +415,7 @@ tape(`scaleZoned.tickFormat()(date) formats hour on minute zero`, function(test)
   var f = zonedTime.scaleZoned("UTC", 7).tickFormat();
   test.equal(f(date.utc(2011, 1, 2, 11)), "11 AM");
   test.equal(f(date.utc(2011, 1, 2, 12)), "12 PM");
-  test.equal(f(date.utc(2011, 1, 2, 13)), "01 PM");
+  test.equal(f(date.utc(2011, 1, 2, 13)), "1 PM");
   test.end();
 });
 
@@ -432,11 +432,5 @@ tape(`scaleZoned.tickFormat()(date) otherwise, formats second`, function(test) {
   test.equal(f(date.utc(2011, 1, 2, 12,  1,  9)), ":09");
   test.equal(f(date.utc(2011, 1, 2, 12,  1, 10)), ":10");
   test.equal(f(date.utc(2011, 1, 2, 12,  1, 11)), ":11");
-  test.end();
-});
-
-tape(`scaleZoned.tickFormat(count, specifier) returns a time format for the specified specifier`, function(test) {
-  var f = zonedTime.scaleZoned("UTC", 7).tickFormat(10, "%c");
-  test.equal(f(date.utc(2011, 1, 2, 12)), "2/2/2011, 12:00:00 PM");
   test.end();
 });

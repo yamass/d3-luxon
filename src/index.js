@@ -1,6 +1,6 @@
 export {
   default as scaleZoned
-} from "./scale/zonedTime.js";
+} from "./scale/scaleZoned.js";
 
 export {
   default as zonedMinute,
