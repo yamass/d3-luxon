@@ -1,6 +1,6 @@
 {
   "name": "d3-luxon",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Luxon-based d3-time and d3-scale implementations",
   "keywords": [
     "d3",
