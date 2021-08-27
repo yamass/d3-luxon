@@ -25,7 +25,7 @@
   dependencies:
     "@types/d3-time" "*"
 
-"@types/d3-time@*":
+"@types/d3-time@*", "@types/d3-time@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/d3-time/-/d3-time-2.0.0.tgz#831dd093db91f16b83ba980e194bb8e4bcef44d6"
   integrity sha512-Abz8bTzy8UWDeYs9pCa3D37i29EWDjNTjemdk0ei1ApYVNqulYlGUKip/jLOpogkPSsPz/GvZCYiC7MFlEk0iQ==
