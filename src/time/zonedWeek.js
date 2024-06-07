@@ -1,5 +1,5 @@
-import interval from "../../node_modules/d3-time/src/interval";
-import {toDateTime} from "../dateTimeUtil";
+import interval from "d3-time/src/interval.js";
+import {toDateTime} from "../dateTimeUtil.js";
 
 function zonedWeekday(zone = "UTC", firstDayOfWeek = 7) {
     const dt = toDateTime.bind(null, zone);

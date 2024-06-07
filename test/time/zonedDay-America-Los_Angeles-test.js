@@ -1,245 +1,215 @@
-var tape = require("tape"),
-    time = require("../../"),
-    date = require("../date-util");
+import assert from "assert";
+import * as time from "../../dist/index.js";
+import * as date from "../date-util.js";
 
 var zone = "America/Los_Angeles";
 
-tape(`zonedDay(${zone})() is equivalent to zonedDay(${zone}).floor(new Date)`, function(test) {
+it(`zonedDay(${zone})() is equivalent to zonedDay(${zone}).floor(new Date)`, () => {
   var t = new Date;
-  test.deepEqual(time.zonedDay(zone)(), time.zonedDay(zone).floor(t));
-  test.end();
+  assert.deepEqual(time.zonedDay(zone)(), time.zonedDay(zone).floor(t));
 });
 
-tape(`zonedDay(${zone})(date) is equivalent to zonedDay(${zone}).floor(date)`, function(test) {
+it(`zonedDay(${zone})(date) is equivalent to zonedDay(${zone}).floor(date)`, () => {
   var t = new Date;
-  test.deepEqual(time.zonedDay(zone)(t), time.zonedDay(zone).floor(t));
-  test.end();
+  assert.deepEqual(time.zonedDay(zone)(t), time.zonedDay(zone).floor(t));
 });
 
-tape(`zonedDay(${zone}).floor(date) returns days`, function(test) {
-  test.deepEqual(time.zonedDay(zone).floor(date.zoned(zone, 2010, 11, 31, 23)), date.zoned(zone, 2010, 11, 31));
-  test.deepEqual(time.zonedDay(zone).floor(date.zoned(zone, 2011, 00, 01, 00)), date.zoned(zone, 2011, 00, 01));
-  test.deepEqual(time.zonedDay(zone).floor(date.zoned(zone, 2011, 00, 01, 01)), date.zoned(zone, 2011, 00, 01));
-  test.end();
+it(`zonedDay(${zone}).floor(date) returns days`, () => {
+  assert.deepEqual(time.zonedDay(zone).floor(date.zoned(zone, 2010, 11, 31, 23)), date.zoned(zone, 2010, 11, 31));
+  assert.deepEqual(time.zonedDay(zone).floor(date.zoned(zone, 2011, 0, 1, 0)), date.zoned(zone, 2011, 0, 1));
+  assert.deepEqual(time.zonedDay(zone).floor(date.zoned(zone, 2011, 0, 1, 1)), date.zoned(zone, 2011, 0, 1));
 });
 
-tape(`zonedDay(${zone}).floor(date) observes daylight saving`, function(test) {
-  test.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 02, 13, 07)), date.zoned(zone, 2011, 02, 12));
-  test.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 02, 13, 08)), date.zoned(zone, 2011, 02, 13));
-  test.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 02, 13, 09)), date.zoned(zone, 2011, 02, 13));
-  test.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 02, 13, 10)), date.zoned(zone, 2011, 02, 13));
-  test.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 10, 06, 07)), date.zoned(zone, 2011, 10, 06));
-  test.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 10, 06, 08)), date.zoned(zone, 2011, 10, 06));
-  test.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 10, 06, 09)), date.zoned(zone, 2011, 10, 06));
-  test.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 10, 06, 10)), date.zoned(zone, 2011, 10, 06));
-  test.end();
+it(`zonedDay(${zone}).floor(date) observes daylight saving`, () => {
+  assert.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 2, 13, 7)), date.zoned(zone, 2011, 2, 12));
+  assert.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 2, 13, 8)), date.zoned(zone, 2011, 2, 13));
+  assert.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 2, 13, 9)), date.zoned(zone, 2011, 2, 13));
+  assert.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 2, 13, 10)), date.zoned(zone, 2011, 2, 13));
+  assert.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 10, 6, 7)), date.zoned(zone, 2011, 10, 6));
+  assert.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 10, 6, 8)), date.zoned(zone, 2011, 10, 6));
+  assert.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 10, 6, 9)), date.zoned(zone, 2011, 10, 6));
+  assert.deepEqual(time.zonedDay(zone).floor(date.utc(2011, 10, 6, 10)), date.zoned(zone, 2011, 10, 6));
 });
 
-tape(`zonedDay(${zone}).floor(date) handles years in the first century`, function(test) {
-  test.deepEqual(time.zonedDay(zone).floor(date.zoned(zone, 0011, 10, 06, 07)), date.zoned(zone, 0011, 10, 06));
-  test.end();
+it(`zonedDay(${zone}).floor(date) handles years in the first century`, () => {
+  assert.deepEqual(time.zonedDay(zone).floor(date.zoned(zone, 11, 10, 6, 7)), date.zoned(zone, 11, 10, 6));
 });
 
-tape(`zonedDay(${zone}).round(date) returns days`, function(test) {
-  test.deepEqual(time.zonedDay(zone).round(date.zoned(zone, 2010, 11, 30, 13)), date.zoned(zone, 2010, 11, 31));
-  test.deepEqual(time.zonedDay(zone).round(date.zoned(zone, 2010, 11, 30, 11)), date.zoned(zone, 2010, 11, 30));
-  test.end();
+it(`zonedDay(${zone}).round(date) returns days`, () => {
+  assert.deepEqual(time.zonedDay(zone).round(date.zoned(zone, 2010, 11, 30, 13)), date.zoned(zone, 2010, 11, 31));
+  assert.deepEqual(time.zonedDay(zone).round(date.zoned(zone, 2010, 11, 30, 11)), date.zoned(zone, 2010, 11, 30));
 });
 
-tape(`zonedDay(${zone}).round(date) observes daylight saving`, function(test) {
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2011, 02, 13, 07)), date.zoned(zone, 2011, 02, 13));
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2011, 02, 13, 08)), date.zoned(zone, 2011, 02, 13));
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2011, 02, 13, 09)), date.zoned(zone, 2011, 02, 13));
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2011, 02, 13, 20)), date.zoned(zone, 2011, 02, 14));
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2011, 10, 06, 07)), date.zoned(zone, 2011, 10, 06));
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2011, 10, 06, 08)), date.zoned(zone, 2011, 10, 06));
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2011, 10, 06, 09)), date.zoned(zone, 2011, 10, 06));
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2011, 10, 06, 20)), date.zoned(zone, 2011, 10, 07));
-  test.end();
+it(`zonedDay(${zone}).round(date) observes daylight saving`, () => {
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2011, 2, 13, 7)), date.zoned(zone, 2011, 2, 13));
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2011, 2, 13, 8)), date.zoned(zone, 2011, 2, 13));
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2011, 2, 13, 9)), date.zoned(zone, 2011, 2, 13));
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2011, 2, 13, 20)), date.zoned(zone, 2011, 2, 14));
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2011, 10, 6, 7)), date.zoned(zone, 2011, 10, 6));
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2011, 10, 6, 8)), date.zoned(zone, 2011, 10, 6));
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2011, 10, 6, 9)), date.zoned(zone, 2011, 10, 6));
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2011, 10, 6, 20)), date.zoned(zone, 2011, 10, 7));
 });
 
-tape(`zonedDay(${zone}).round(date) handles midnight in leap years`, function(test) {
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2012, 02, 01, 00)), date.zoned(zone, 2012, 02, 01));
-  test.deepEqual(time.zonedDay(zone).round(date.utc(2012, 02, 01, 00)), date.zoned(zone, 2012, 02, 01));
-  test.end();
+it(`zonedDay(${zone}).round(date) handles midnight in leap years`, () => {
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2012, 2, 1, 0)), date.zoned(zone, 2012, 2, 1));
+  assert.deepEqual(time.zonedDay(zone).round(date.utc(2012, 2, 1, 0)), date.zoned(zone, 2012, 2, 1));
 });
 
-tape(`zonedDay(${zone}).ceil(date) returns days`, function(test) {
-  test.deepEqual(time.zonedDay(zone).ceil(date.zoned(zone, 2010, 11, 30, 23)), date.zoned(zone, 2010, 11, 31));
-  test.deepEqual(time.zonedDay(zone).ceil(date.zoned(zone, 2010, 11, 31, 00)), date.zoned(zone, 2010, 11, 31));
-  test.deepEqual(time.zonedDay(zone).ceil(date.zoned(zone, 2010, 11, 31, 01)), date.zoned(zone, 2011, 00, 01));
-  test.end();
+it(`zonedDay(${zone}).ceil(date) returns days`, () => {
+  assert.deepEqual(time.zonedDay(zone).ceil(date.zoned(zone, 2010, 11, 30, 23)), date.zoned(zone, 2010, 11, 31));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.zoned(zone, 2010, 11, 31, 0)), date.zoned(zone, 2010, 11, 31));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.zoned(zone, 2010, 11, 31, 1)), date.zoned(zone, 2011, 0, 1));
 });
 
-tape(`zonedDay(${zone}).ceil(date) observes start of daylight saving`, function(test) {
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 02, 13, 07)), date.zoned(zone, 2011, 02, 13));
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 02, 13, 08)), date.zoned(zone, 2011, 02, 13));
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 02, 13, 09)), date.zoned(zone, 2011, 02, 14));
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 02, 13, 10)), date.zoned(zone, 2011, 02, 14));
-  test.end();
+it(`zonedDay(${zone}).ceil(date) observes start of daylight saving`, () => {
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 2, 13, 7)), date.zoned(zone, 2011, 2, 13));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 2, 13, 8)), date.zoned(zone, 2011, 2, 13));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 2, 13, 9)), date.zoned(zone, 2011, 2, 14));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 2, 13, 10)), date.zoned(zone, 2011, 2, 14));
 });
 
-tape(`zonedDay(${zone}).ceil(date) observes end of daylight saving`, function(test) {
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 10, 06, 07)), date.zoned(zone, 2011, 10, 06));
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 10, 06, 08)), date.zoned(zone, 2011, 10, 07));
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 10, 06, 09)), date.zoned(zone, 2011, 10, 07));
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 10, 06, 10)), date.zoned(zone, 2011, 10, 07));
-  test.end();
+it(`zonedDay(${zone}).ceil(date) observes end of daylight saving`, () => {
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 10, 6, 7)), date.zoned(zone, 2011, 10, 6));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 10, 6, 8)), date.zoned(zone, 2011, 10, 7));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 10, 6, 9)), date.zoned(zone, 2011, 10, 7));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2011, 10, 6, 10)), date.zoned(zone, 2011, 10, 7));
 });
 
-tape(`zonedDay(${zone}).ceil(date) handles midnight for leap years`, function(test) {
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2012, 02, 01, 00)), date.zoned(zone, 2012, 02, 01));
-  test.deepEqual(time.zonedDay(zone).ceil(date.utc(2012, 02, 01, 00)), date.zoned(zone, 2012, 02, 01));
-  test.end();
+it(`zonedDay(${zone}).ceil(date) handles midnight for leap years`, () => {
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2012, 2, 1, 0)), date.zoned(zone, 2012, 2, 1));
+  assert.deepEqual(time.zonedDay(zone).ceil(date.utc(2012, 2, 1, 0)), date.zoned(zone, 2012, 2, 1));
 });
 
-tape(`zonedDay(${zone}).offset(date) is an alias for zonedDay(${zone}).offset(date, 1)`, function(test) {
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999)), date.zoned(zone, 2011, 00, 01, 23, 59, 59, 999));
-  test.end();
+it(`zonedDay(${zone}).offset(date) is an alias for zonedDay(${zone}).offset(date, 1)`, () => {
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999)), date.zoned(zone, 2011, 0, 1, 23, 59, 59, 999));
 });
 
-tape(`zonedDay(${zone}).offset(date, step) does not modify the passed-in date`, function(test) {
+it(`zonedDay(${zone}).offset(date, step) does not modify the passed-in date`, () => {
   var d = date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999);
   time.zonedDay(zone).offset(d, +1);
-  test.deepEqual(d, date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999));
-  test.end();
+  assert.deepEqual(d, date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999));
 });
 
-tape(`zonedDay(${zone}).offset(date, step) does not round the passed-in date`, function(test) {
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999), +1), date.zoned(zone, 2011, 00, 01, 23, 59, 59, 999));
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 59, 456), -2), date.zoned(zone, 2010, 11, 29, 23, 59, 59, 456));
-  test.end();
+it(`zonedDay(${zone}).offset(date, step) does not round the passed-in date`, () => {
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999), +1), date.zoned(zone, 2011, 0, 1, 23, 59, 59, 999));
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 59, 456), -2), date.zoned(zone, 2010, 11, 29, 23, 59, 59, 456));
 });
 
-tape(`zonedDay(${zone}).offset(date, step) allows step to be negative`, function(test) {
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31), -1), date.zoned(zone, 2010, 11, 30));
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2011, 00, 01), -2), date.zoned(zone, 2010, 11, 30));
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2011, 00, 01), -1), date.zoned(zone, 2010, 11, 31));
-  test.end();
+it(`zonedDay(${zone}).offset(date, step) allows step to be negative`, () => {
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31), -1), date.zoned(zone, 2010, 11, 30));
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2011, 0, 1), -2), date.zoned(zone, 2010, 11, 30));
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2011, 0, 1), -1), date.zoned(zone, 2010, 11, 31));
 });
 
-tape(`zonedDay(${zone}).offset(date, step) allows step to be positive`, function(test) {
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31), +1), date.zoned(zone, 2011, 00, 01));
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 30), +2), date.zoned(zone, 2011, 00, 01));
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 30), +1), date.zoned(zone, 2010, 11, 31));
-  test.end();
+it(`zonedDay(${zone}).offset(date, step) allows step to be positive`, () => {
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31), +1), date.zoned(zone, 2011, 0, 1));
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 30), +2), date.zoned(zone, 2011, 0, 1));
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 30), +1), date.zoned(zone, 2010, 11, 31));
 });
 
-tape(`zonedDay(${zone}).offset(date, step) allows step to be zero`, function(test) {
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999), 0), date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999));
-  test.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 58, 000), 0), date.zoned(zone, 2010, 11, 31, 23, 59, 58, 000));
-  test.end();
+it(`zonedDay(${zone}).offset(date, step) allows step to be zero`, () => {
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999), 0), date.zoned(zone, 2010, 11, 31, 23, 59, 59, 999));
+  assert.deepEqual(time.zonedDay(zone).offset(date.zoned(zone, 2010, 11, 31, 23, 59, 58, 0), 0), date.zoned(zone, 2010, 11, 31, 23, 59, 58, 0));
 });
 
-tape(`zonedDay(${zone}).range(start, stop) returns days between start (inclusive) and stop (exclusive)`, function(test) {
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 04), date.zoned(zone, 2011, 10, 10)), [
-    date.zoned(zone, 2011, 10, 04),
-    date.zoned(zone, 2011, 10, 05),
-    date.zoned(zone, 2011, 10, 06),
-    date.zoned(zone, 2011, 10, 07),
-    date.zoned(zone, 2011, 10, 08),
-      date.zoned(zone, 2011, 10, 09)
+it(`zonedDay(${zone}).range(start, stop) returns days between start (inclusive) and stop (exclusive)`, () => {
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 4), date.zoned(zone, 2011, 10, 10)), [
+    date.zoned(zone, 2011, 10, 4),
+    date.zoned(zone, 2011, 10, 5),
+    date.zoned(zone, 2011, 10, 6),
+    date.zoned(zone, 2011, 10, 7),
+    date.zoned(zone, 2011, 10, 8),
+      date.zoned(zone, 2011, 10, 9)
 ]);
-  test.end();
 });
 
-tape(`zonedDay(${zone}).range(start, stop) returns days`, function(test) {
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 04, 02), date.zoned(zone, 2011, 10, 10, 13)), [
-    date.zoned(zone, 2011, 10, 05),
-    date.zoned(zone, 2011, 10, 06),
-    date.zoned(zone, 2011, 10, 07),
-    date.zoned(zone, 2011, 10, 08),
-      date.zoned(zone, 2011, 10, 09),
+it(`zonedDay(${zone}).range(start, stop) returns days`, () => {
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 4, 2), date.zoned(zone, 2011, 10, 10, 13)), [
+    date.zoned(zone, 2011, 10, 5),
+    date.zoned(zone, 2011, 10, 6),
+    date.zoned(zone, 2011, 10, 7),
+    date.zoned(zone, 2011, 10, 8),
+      date.zoned(zone, 2011, 10, 9),
   date.zoned(zone, 2011, 10, 10)
 ]);
-  test.end();
 });
 
-tape(`zonedDay(${zone}).range(start, stop) coerces start and stop to dates`, function(test) {
-  test.deepEqual(time.zonedDay(zone).range(+date.zoned(zone, 2011, 10, 04), +date.zoned(zone, 2011, 10, 07)), [
-    date.zoned(zone, 2011, 10, 04),
-    date.zoned(zone, 2011, 10, 05),
-    date.zoned(zone, 2011, 10, 06)
+it(`zonedDay(${zone}).range(start, stop) coerces start and stop to dates`, () => {
+  assert.deepEqual(time.zonedDay(zone).range(+date.zoned(zone, 2011, 10, 4), +date.zoned(zone, 2011, 10, 7)), [
+    date.zoned(zone, 2011, 10, 4),
+    date.zoned(zone, 2011, 10, 5),
+    date.zoned(zone, 2011, 10, 6)
   ]);
-  test.end();
 });
 
-tape(`zonedDay(${zone}).range(start, stop) returns the empty array for invalid dates`, function(test) {
-  test.deepEqual(time.zonedDay(zone).range(new Date(NaN), Infinity), []);
-  test.end();
+it(`zonedDay(${zone}).range(start, stop) returns the empty array for invalid dates`, () => {
+  assert.deepEqual(time.zonedDay(zone).range(new Date(NaN), Infinity), []);
 });
 
-tape(`zonedDay(${zone}).range(start, stop) returns the empty array if start >= stop`, function(test) {
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 10), date.zoned(zone, 2011, 10, 04)), []);
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 10), date.zoned(zone, 2011, 10, 10)), []);
-  test.end();
+it(`zonedDay(${zone}).range(start, stop) returns the empty array if start >= stop`, () => {
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 10), date.zoned(zone, 2011, 10, 4)), []);
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 10), date.zoned(zone, 2011, 10, 10)), []);
 });
 
-tape(`zonedDay(${zone}).range(start, stop, step) returns every step day`, function(test) {
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 04, 02), date.zoned(zone, 2011, 10, 14, 13), 3), [
-    date.zoned(zone, 2011, 10, 05),
-    date.zoned(zone, 2011, 10, 08),
+it(`zonedDay(${zone}).range(start, stop, step) returns every step day`, () => {
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 10, 4, 2), date.zoned(zone, 2011, 10, 14, 13), 3), [
+    date.zoned(zone, 2011, 10, 5),
+    date.zoned(zone, 2011, 10, 8),
       date.zoned(zone, 2011, 10, 11),
       date.zoned(zone, 2011, 10, 14)
 ]);
-  test.end();
 });
 
-tape(`zonedDay(${zone}).range(start, stop, step) returns the empty array if step is zero, negative or NaN`, function(test) {
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 00, 01, 00), date.zoned(zone, 2011, 04, 09, 00), 0), []);
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 00, 01, 00), date.zoned(zone, 2011, 04, 09, 00), -1), []);
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 00, 01, 00), date.zoned(zone, 2011, 04, 09, 00), 0.5), []);
-  test.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 00, 01, 00), date.zoned(zone, 2011, 04, 09, 00), NaN), []);
-  test.end();
+it(`zonedDay(${zone}).range(start, stop, step) returns the empty array if step is zero, negative or NaN`, () => {
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 0, 1, 0), date.zoned(zone, 2011, 4, 9, 0), 0), []);
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 0, 1, 0), date.zoned(zone, 2011, 4, 9, 0), -1), []);
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 0, 1, 0), date.zoned(zone, 2011, 4, 9, 0), 0.5), []);
+  assert.deepEqual(time.zonedDay(zone).range(date.zoned(zone, 2011, 0, 1, 0), date.zoned(zone, 2011, 4, 9, 0), NaN), []);
 });
 
-tape(`zonedDay(${zone}).count(start, end) counts days after start (exclusive) and before end (inclusive)`, function(test) {
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01, 00), date.zoned(zone, 2011, 04, 09, 00)), 128);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01, 01), date.zoned(zone, 2011, 04, 09, 00)), 128);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2010, 11, 31, 23), date.zoned(zone, 2011, 04, 09, 00)), 129);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01, 00), date.zoned(zone, 2011, 04, 08, 23)), 127);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01, 00), date.zoned(zone, 2011, 04, 09, 01)), 128);
-  test.end();
+it(`zonedDay(${zone}).count(start, end) counts days after start (exclusive) and before end (inclusive)`, () => {
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1, 0), date.zoned(zone, 2011, 4, 9, 0)), 128);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1, 1), date.zoned(zone, 2011, 4, 9, 0)), 128);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2010, 11, 31, 23), date.zoned(zone, 2011, 4, 9, 0)), 129);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1, 0), date.zoned(zone, 2011, 4, 8, 23)), 127);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1, 0), date.zoned(zone, 2011, 4, 9, 1)), 128);
 });
 
-tape(`zonedDay(${zone}).count(start, end) observes daylight saving`, function(test) {
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01), date.zoned(zone, 2011, 02, 13, 01)), 71);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01), date.zoned(zone, 2011, 02, 13, 03)), 71);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01), date.zoned(zone, 2011, 02, 13, 04)), 71);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01), date.zoned(zone, 2011, 10, 06, 00)), 309);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01), date.zoned(zone, 2011, 10, 06, 01)), 309);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01), date.zoned(zone, 2011, 10, 06, 02)), 309);
-  test.end();
+it(`zonedDay(${zone}).count(start, end) observes daylight saving`, () => {
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1), date.zoned(zone, 2011, 2, 13, 1)), 71);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1), date.zoned(zone, 2011, 2, 13, 3)), 71);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1), date.zoned(zone, 2011, 2, 13, 4)), 71);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1), date.zoned(zone, 2011, 10, 6, 0)), 309);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1), date.zoned(zone, 2011, 10, 6, 1)), 309);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1), date.zoned(zone, 2011, 10, 6, 2)), 309);
 });
 
-tape(`zonedDay(${zone}).count(start, stop) does not exhibit floating-point rounding error`, function(test) {
+it(`zonedDay(${zone}).count(start, stop) does not exhibit floating-point rounding error`, () => {
   var d = date.zoned(zone, 2011, 4, 9);
-  test.equal(time.zonedDay(zone).count(time.zonedYear(zone)(d), d), 128);
-  test.end();
+  assert.strictEqual(time.zonedDay(zone).count(time.zonedYear(zone)(d), d), 128);
 });
 
-tape(`zonedDay(${zone}).count(start, end) returns 364 or 365 for a full year`, function(test) {
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 1999, 00, 01), date.zoned(zone, 1999, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2000, 00, 01), date.zoned(zone, 2000, 11, 31)), 365); // leap year
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2001, 00, 01), date.zoned(zone, 2001, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2002, 00, 01), date.zoned(zone, 2002, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2003, 00, 01), date.zoned(zone, 2003, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2004, 00, 01), date.zoned(zone, 2004, 11, 31)), 365); // leap year
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2005, 00, 01), date.zoned(zone, 2005, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2006, 00, 01), date.zoned(zone, 2006, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2007, 00, 01), date.zoned(zone, 2007, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2008, 00, 01), date.zoned(zone, 2008, 11, 31)), 365); // leap year
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2009, 00, 01), date.zoned(zone, 2009, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2010, 00, 01), date.zoned(zone, 2010, 11, 31)), 364);
-  test.equal(time.zonedDay(zone).count(date.zoned(zone, 2011, 00, 01), date.zoned(zone, 2011, 11, 31)), 364);
-  test.end();
+it(`zonedDay(${zone}).count(start, end) returns 364 or 365 for a full year`, () => {
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 1999, 0, 1), date.zoned(zone, 1999, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2000, 0, 1), date.zoned(zone, 2000, 11, 31)), 365); // leap year
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2001, 0, 1), date.zoned(zone, 2001, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2002, 0, 1), date.zoned(zone, 2002, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2003, 0, 1), date.zoned(zone, 2003, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2004, 0, 1), date.zoned(zone, 2004, 11, 31)), 365); // leap year
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2005, 0, 1), date.zoned(zone, 2005, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2006, 0, 1), date.zoned(zone, 2006, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2007, 0, 1), date.zoned(zone, 2007, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2008, 0, 1), date.zoned(zone, 2008, 11, 31)), 365); // leap year
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2009, 0, 1), date.zoned(zone, 2009, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2010, 0, 1), date.zoned(zone, 2010, 11, 31)), 364);
+  assert.strictEqual(time.zonedDay(zone).count(date.zoned(zone, 2011, 0, 1), date.zoned(zone, 2011, 11, 31)), 364);
 });
 
-tape(`zonedDay(${zone}).every(step) returns every stepth day, starting with the first day of the month`, function(test) {
-  test.deepEqual(time.zonedDay(zone).every(3).range(date.zoned(zone, 2008, 11, 30, 0, 12), date.zoned(zone, 2009, 0, 5, 23, 48)), [date.zoned(zone, 2008, 11, 31), date.zoned(zone, 2009, 0, 1), date.zoned(zone, 2009, 0, 4)]);
-  test.deepEqual(time.zonedDay(zone).every(5).range(date.zoned(zone, 2008, 11, 30, 0, 12), date.zoned(zone, 2009, 0, 6, 23, 48)), [date.zoned(zone, 2008, 11, 31), date.zoned(zone, 2009, 0, 1), date.zoned(zone, 2009, 0, 6)]);
-  test.deepEqual(time.zonedDay(zone).every(7).range(date.zoned(zone, 2008, 11, 30, 0, 12), date.zoned(zone, 2009, 0, 8, 23, 48)), [date.zoned(zone, 2009, 0, 1), date.zoned(zone, 2009, 0, 8)]);
-  test.end();
+it(`zonedDay(${zone}).every(step) returns every stepth day, starting with the first day of the month`, () => {
+  assert.deepEqual(time.zonedDay(zone).every(3).range(date.zoned(zone, 2008, 11, 30, 0, 12), date.zoned(zone, 2009, 0, 5, 23, 48)), [date.zoned(zone, 2008, 11, 31), date.zoned(zone, 2009, 0, 1), date.zoned(zone, 2009, 0, 4)]);
+  assert.deepEqual(time.zonedDay(zone).every(5).range(date.zoned(zone, 2008, 11, 30, 0, 12), date.zoned(zone, 2009, 0, 6, 23, 48)), [date.zoned(zone, 2008, 11, 31), date.zoned(zone, 2009, 0, 1), date.zoned(zone, 2009, 0, 6)]);
+  assert.deepEqual(time.zonedDay(zone).every(7).range(date.zoned(zone, 2008, 11, 30, 0, 12), date.zoned(zone, 2009, 0, 8, 23, 48)), [date.zoned(zone, 2009, 0, 1), date.zoned(zone, 2009, 0, 8)]);
 });
 
 

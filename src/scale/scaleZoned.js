@@ -1,12 +1,12 @@
 import {utcFormat} from "d3-time-format";
-import {calendar} from "../../node_modules/d3-scale/src/time";
-import {initRange} from "../../node_modules/d3-scale/src/init";
-import zonedYear from "../time/zonedYear";
-import zonedMonth from "../time/zonedMonth";
-import {zonedWeek} from "../time/zonedWeek";
-import zonedDay from "../time/zonedDay";
-import zonedHour from "../time/zonedHour";
-import zonedMinute from "../time/zonedMinute";
+import {calendar} from "d3-scale/src/time";
+import {initRange} from "d3-scale/src/init";
+import zonedYear from "../time/zonedYear.js";
+import zonedMonth from "../time/zonedMonth.js";
+import {zonedWeek} from "../time/zonedWeek.js";
+import zonedDay from "../time/zonedDay.js";
+import zonedHour from "../time/zonedHour.js";
+import zonedMinute from "../time/zonedMinute.js";
 import {utcMillisecond, utcSecond} from "d3-time";
 import {DateTime} from "luxon";
 

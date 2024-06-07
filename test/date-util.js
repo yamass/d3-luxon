@@ -1,6 +1,7 @@
-var DateTime = require("luxon").DateTime;
+import assert from "assert";
+import {DateTime} from "luxon";
 
-exports.zoned = function(zone, year, month, day, hour, minute, second, millisecond) {
+export var zoned = function(zone, year, month, day, hour, minute, second, millisecond) {
   return DateTime.fromObject({
       zone, year,
       month: month != null ? month+1 : undefined,
@@ -8,7 +9,7 @@ exports.zoned = function(zone, year, month, day, hour, minute, second, milliseco
   }).toJSDate();
 };
 
-exports.local = function(year, month, day, hours, minutes, seconds, milliseconds) {
+export var local = function(year, month, day, hours, minutes, seconds, milliseconds) {
   if (year == null) year = 0;
   if (month == null) month = 0;
   if (day == null) day = 1;
@@ -24,7 +25,7 @@ exports.local = function(year, month, day, hours, minutes, seconds, milliseconds
   return new Date(year, month, day, hours, minutes, seconds, milliseconds);
 };
 
-exports.utc = function(year, month, day, hours, minutes, seconds, milliseconds) {
+export var utc = function(year, month, day, hours, minutes, seconds, milliseconds) {
   if (year == null) year = 0;
   if (month == null) month = 0;
   if (day == null) day = 1;
@@ -40,7 +41,7 @@ exports.utc = function(year, month, day, hours, minutes, seconds, milliseconds) 
   return new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
 };
 
-exports.zones = [
+export var zones = [
   'Europe/Andorra',
   'Asia/Dubai',
   'Asia/Kabul',
