@@ -52,7 +52,7 @@ tape("zonedTime().tickFormat will return localized strings", function(test) {
     test.equal(tickFormat(date.zoned(zone, 2020, 1, 13, 0, 0, 0, 1)), ".001");
 
     test.equal(tickFormat(date.zoned(zone, 2020, 2, 15, 14, 59, 59, 999)), ".999");
-    test.equal(tickFormat(date.zoned(zone, 2020, 1, 15, 15, 0, 0, 0)), "3 PM");
+    test.equal(tickFormat(date.zoned(zone, 2020, 1, 15, 15, 0, 0, 0)), "3 PM");
     test.equal(tickFormat(date.zoned(zone, 2020, 1, 15, 15, 0, 0, 1)), ".001");
 
     test.equal(tickFormat(date.zoned(zone, 2020, 2, 15, 18, 34, 59, 999)), ".999");

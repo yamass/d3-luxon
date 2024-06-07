@@ -413,9 +413,9 @@ tape(`scaleZoned.tickFormat()(date) formats date on midnight`, function(test) {
 
 tape(`scaleZoned.tickFormat()(date) formats hour on minute zero`, function(test) {
   var f = zonedTime.scaleZoned("UTC", 7).tickFormat();
-  test.equal(f(date.utc(2011, 1, 2, 11)), "11 AM");
-  test.equal(f(date.utc(2011, 1, 2, 12)), "12 PM");
-  test.equal(f(date.utc(2011, 1, 2, 13)), "1 PM");
+  test.equal(f(date.utc(2011, 1, 2, 11)), "11 AM");
+  test.equal(f(date.utc(2011, 1, 2, 12)), "12 PM");
+  test.equal(f(date.utc(2011, 1, 2, 13)), "1 PM");
   test.end();
 });
 
