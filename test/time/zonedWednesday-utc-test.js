@@ -1,5 +1,5 @@
 import assert from "assert";
-import * as time from "../../dist/index.js";
+import * as time from "../../src/index.js";
 import * as date from "../date-util.js";
 
 it(`zonedWednesday.floor(date) returns Wednesdays`, () => {

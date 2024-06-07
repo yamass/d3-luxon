@@ -1,5 +1,5 @@
 import assert from "assert";
-import * as time from "../../dist/index.js";
+import * as time from "../../src/index.js";
 import * as date from "../date-util.js";
 
 it(`zonedYear.every(n).floor(date) returns integer multiples of n years`, () => {

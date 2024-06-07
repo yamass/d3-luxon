@@ -1,7 +1,8 @@
 import assert from "assert";
 import * as interpolate from "d3-interpolate";
-import * as zonedTime from "../../dist/index.js";
+import * as zonedTime from "../../src/index.js";
 import * as date from "../date-util.js";
+import {DateTime} from "luxon";
 
 var zone = "America/Los_Angeles";
 
@@ -29,7 +30,13 @@ it("time.nice() can nice sub-second domains", () => {
 
 it("time.nice() can nice multi-year domains", () => {
   var x = zonedTime.scaleZoned(zone, 7).domain([date.zoned(zone, 2001, 0, 1), date.zoned(zone, 2138, 0, 1)]);
-  assert.deepEqual(x.nice().domain(), [date.zoned(zone, 2000, 0, 1), date.zoned(zone, 2140, 0, 1)]);
+  let domain = x.nice().domain();
+
+  console.log(zone, DateTime.fromObject({
+    zone, year: 2000, month: 1, day: 1
+  }).toJSON());
+
+  assert.deepEqual(domain, [date.zoned(zone, 2000, 0, 1), date.zoned(zone, 2140, 0, 1)]);
 });
 
 it("time.nice() can nice empty domains", () => {

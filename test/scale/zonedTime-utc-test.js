@@ -1,6 +1,6 @@
 import assert from "assert";
 import * as interpolate from "d3-interpolate";
-import * as zonedTime from "../../dist/index.js";
+import * as zonedTime from "../../src/index.js";
 import * as date from "../date-util.js";
 
 it(`scaleZoned.nice() is an alias for scaleZoned.nice(10)`, () => {

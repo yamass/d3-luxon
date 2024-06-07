@@ -1,4 +1,4 @@
-import interval from "d3-time/src/interval.js";
+import {timeInterval as interval} from "../../node_modules/d3-time/src/interval.js";
 import {toDateTime} from "../dateTimeUtil.js";
 
 function zonedHour(zone = "UTC") {
