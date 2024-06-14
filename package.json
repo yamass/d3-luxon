@@ -1,6 +1,6 @@
 {
   "name": "d3-luxon",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Luxon-based d3-time and d3-scale implementations",
   "keywords": [
     "d3",
@@ -35,25 +35,25 @@
     "prebuild": "rm -f dist/*",
     "build": "yarn test && node build.js",
     "test": "mocha 'test/**/*-test.js' && eslint src",
-    "prepublishOnly": "rm -rf dist && yarn test",
+    "prepublishOnly": "rm -rf dist && yarn build",
     "postpublish": "git push && git push --tags"
   },
   "sideEffects": false,
   "dependencies": {
     "@types/d3-scale": "^4.0.8",
-    "d3-time": "^3.1.0",
-    "d3-scale": "^4.0.2",
     "d3-array": "^3.2.4",
+    "d3-scale": "^4.0.2",
+    "d3-time": "^3.1.0",
     "luxon": "^3.4.4"
   },
   "peerDependencies": {
-    "d3-scale": "^4.0.2",
     "d3-array": "^3.2.4",
+    "d3-scale": "^4.0.2",
     "luxon": "^3.4.4"
   },
   "devDependencies": {
+    "esbuild": "^0.21.5",
     "eslint": "^8.57.0",
-    "mocha": "10.4.0",
-    "esbuild": "^0.21.5"
+    "mocha": "10.4.0"
   }
 }
