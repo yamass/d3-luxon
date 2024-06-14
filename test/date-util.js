@@ -3,10 +3,10 @@ import {DateTime} from "luxon";
 
 export var zoned = function(zone, year, month, day, hour, minute, second, millisecond) {
   return DateTime.fromObject({
-      zone, year,
+      year,
       month: month != null ? month+1 : undefined,
       day, hour, minute, second, millisecond
-  }).toJSDate();
+  }, {zone}).toJSDate();
 };
 
 export var local = function(year, month, day, hours, minutes, seconds, milliseconds) {

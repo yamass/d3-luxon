@@ -33,8 +33,8 @@ it("time.nice() can nice multi-year domains", () => {
   let domain = x.nice().domain();
 
   console.log(zone, DateTime.fromObject({
-    zone, year: 2000, month: 1, day: 1
-  }).toJSON());
+    year: 2000, month: 1, day: 1
+  }, {zone}).toJSON());
 
   assert.deepEqual(domain, [date.zoned(zone, 2000, 0, 1), date.zoned(zone, 2140, 0, 1)]);
 });

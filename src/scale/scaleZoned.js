@@ -100,7 +100,7 @@ function ticker(year, month, week, day, hour, minute) {
 export default function scaleZoned(zone, firstDayOfWeek, locale, ...additionalArguments) {
     const [timeTicks, timeTickInterval] = ticker(zonedYear(zone), zonedMonth(zone), zonedWeek(zone), zonedDay(zone), zonedHour(zone), zonedMinute(zone));
     let scale = initRange.apply(calendar(timeTicks, timeTickInterval, zonedYear(zone), zonedMonth(zone), zonedWeek(zone, firstDayOfWeek), zonedDay(zone), zonedHour(zone), zonedMinute(zone), utcSecond, utcFormat)
-        .domain([DateTime.fromObject({year: 2000, month: 1, day: 1, zone: zone}).toJSDate(), DateTime.fromObject({year: 2000, month: 1, day: 2, zone: zone}).toJSDate()]), additionalArguments);
+        .domain([DateTime.fromObject({year: 2000, month: 1, day: 1}, {zone: zone}).toJSDate(), DateTime.fromObject({year: 2000, month: 1, day: 2}, {zone: zone}).toJSDate()]), additionalArguments);
     scale.tickFormat = tickFormat.bind(null, zone, locale);
     return scale;
 }
