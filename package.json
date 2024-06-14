@@ -16,7 +16,12 @@
   },
   "type": "module",
   "module": "dist/index.js",
+  "main": "dist/index.js",
   "types": "src/index.d.ts",
+  "exports": {
+    "import": "./dist/index.js",
+    "types": "./src/index.d.ts"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/yamass/d3-luxon.git"
@@ -28,7 +33,7 @@
   ],
   "scripts": {
     "prebuild": "rm -f dist/*",
-    "build": "esbuild src/index.js --bundle --outfile=dist/index.js --format=esm",
+    "build": "node build.js",
     "test": "mocha 'test/**/*-test.js' && eslint src",
     "prepublishOnly": "rm -rf dist && yarn test",
     "postpublish": "git push && git push --tags"
@@ -36,7 +41,14 @@
   "sideEffects": false,
   "dependencies": {
     "@types/d3-scale": "^3.2.0",
-    "d3": "^7.9.0",
+    "d3-time": "^3.1.0",
+    "d3-scale": "^4.0.2",
+    "d3-array": "^3.2.4",
+    "luxon": "^1.25.0"
+  },
+  "peerDependencies": {
+    "d3-scale": "^4.0.2",
+    "d3-array": "^3.2.4",
     "luxon": "^1.25.0"
   },
   "devDependencies": {
